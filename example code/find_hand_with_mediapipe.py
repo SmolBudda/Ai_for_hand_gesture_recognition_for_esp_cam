@@ -8,7 +8,7 @@ mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(static_image_mode=True, max_num_hands=2)
 
 # Wczytanie zdjęcia
-image = cv2.imread('twoje_zdjecie.jpg')
+image = cv2.imread('handimg.jpg')
 image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # Detekcja

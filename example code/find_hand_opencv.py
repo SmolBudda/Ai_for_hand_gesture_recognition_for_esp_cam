@@ -55,4 +55,5 @@ def detect_fingers(image_path):
     cv2.destroyAllWindows()
 
 # Uruchomienie
-# detect_fingers('twoje_zdjecie.jpg')
+print(cv2.__version__)
+detect_fingers('handimg.jpg')
