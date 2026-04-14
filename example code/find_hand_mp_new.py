@@ -57,7 +57,7 @@ VisionRunningMode = mp.tasks.vision.RunningMode
 #     running_mode=VisionRunningMode.IMAGE)
 # with GestureRecognizer.create_from_options(options) as recognizer:
 options = HandLandmarkerOptions(
-    base_options=BaseOptions(model_asset_path='/home/matylda/Documents/hand_landmarker.task'),
+    base_options=BaseOptions(model_asset_path='./hand_landmarker.task'),
     running_mode=VisionRunningMode.IMAGE)
 with HandLandmarker.create_from_options(options) as landmarker:
     import cv2
