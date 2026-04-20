@@ -56,4 +56,4 @@ def detect_fingers(image_path):
 
 # Uruchomienie
 print(cv2.__version__)
-detect_fingers('handimg.jpg')
+detect_fingers('3.jpg')

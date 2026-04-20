@@ -4,8 +4,8 @@
 #include <esp_camera.h>
 
 // Konfiguracja WiFi
-const char* SSID = "Tel-AWiFi";          // Zmień na swoją sieć WiFi
-const char* PASSWORD = "SlalomAlejkom";  // Zmień na hasło WiFi
+const char* SSID = /*"Tel-AWiFi";*/ "instrukcje_dla_studenta_2025" ;         // Zmień na swoją sieć WiFi
+const char* PASSWORD = /* "SlalomAlejkom"; */ "twoja_stara";  // Zmień na hasło WiFi
 
 // Pinout dla ESP32-CAM (AI-Thinker)
 #define PWDN_GPIO_NUM    32
@@ -159,3 +159,42 @@ void loop() {
   server.handleClient();
   delay(1);
 } 
+
+
+
+
+
+
+// #include <Arduino.h>
+
+
+// // Definicje pinów dla ESP32-CAM
+// const int buttonPin = 0; // Przycisk podłączony do GPIO 0
+// const int ledPin = 4;    // Wbudowany biały LED (Flash) na ESP32-CAM
+
+// void setup() {
+//   // Ustawienie pinu diody jako wyjście
+//   pinMode(ledPin, OUTPUT);
+  
+//   // Ustawienie pinu przycisku jako wejście z podciągnięciem do zasilania (PULLUP)
+//   // Gdy przycisk nie jest wciśnięty, odczytamy stan HIGH (1).
+//   // Gdy przycisk jest wciśnięty (zwarty do masy), odczytamy stan LOW (0).
+//   pinMode(buttonPin, INPUT_PULLUP);
+  
+//   // Upewniamy się, że dioda jest wyłączona po uruchomieniu
+//   digitalWrite(ledPin, LOW);
+// }
+
+// void loop() {
+//   // Odczytujemy aktualny stan przycisku
+//   int buttonState = digitalRead(buttonPin);
+
+//   // Sprawdzamy, czy przycisk jest wciśnięty
+//   if (buttonState == LOW) {
+//     // Włącz białego LEDa
+//     digitalWrite(ledPin, HIGH); 
+//   } else {
+//     // Wyłącz białego LEDa
+//     digitalWrite(ledPin, LOW);  
+//   }
+// }
