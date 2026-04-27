@@ -59,14 +59,12 @@ class GestureRecognizer:
         
         print("\n✓ Trening zakończony!")
     
-    def evaluate(self, X_test, y_test, set_name="Test"):
+    def evaluate(self, X_test, y_test, set_name="Test", verbose=True):
         """Ewaluacja modelu na zbiorze testowym"""
         if not self.is_trained:
             print("Błąd: Model nie został wytrenowany!")
             return
-        
-        print(f"\n=== EWALUACJA NA {set_name.upper()} ===")
-        
+                
         # Predykcja
         y_pred = self.model.predict(X_test)
         
@@ -75,21 +73,23 @@ class GestureRecognizer:
         precision = precision_score(y_test, y_pred, average='weighted', zero_division=0)
         recall = recall_score(y_test, y_pred, average='weighted', zero_division=0)
         f1 = f1_score(y_test, y_pred, average='weighted', zero_division=0)
-        
-        print(f"\nMetryki:")
-        print(f"  Accuracy:  {accuracy:.4f} ({accuracy*100:.2f}%)")
-        print(f"  Precision: {precision:.4f}")
-        print(f"  Recall:    {recall:.4f}")
-        print(f"  F1-Score:  {f1:.4f}")
-        
-        # Raport klasyfikacji
-        print(f"\n--- Raport Klasyfikacji ---")
-        print(classification_report(y_test, y_pred))
-        
-        # Macierz pomyłek
-        cm = confusion_matrix(y_test, y_pred)
-        print(f"\nMacierz pomyłek:")
-        print(cm)
+
+        if verbose:        
+            print(f"\n=== EWALUACJA NA {set_name.upper()} ===")
+            # print(f"\nMetryki:")
+            print(f"  Accuracy:  {accuracy:.4f} ({accuracy*100:.2f}%)")
+            print(f"  Precision: {precision:.4f}")
+            print(f"  Recall:    {recall:.4f}")
+            print(f"  F1-Score:  {f1:.4f}")
+            
+            # Raport klasyfikacji
+            print(f"\n--- Raport Klasyfikacji ---")
+            print(classification_report(y_test, y_pred))
+            
+            # Macierz pomyłek
+            cm = confusion_matrix(y_test, y_pred)
+            # print(f"\nMacierz pomyłek:")
+            # print(cm)
         
         return {
             'accuracy': accuracy,
