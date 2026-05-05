@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.model_selection import StratifiedKFold
 from train_random_forest_classifier import GestureRecognizer 
 
-def run_cross_validation(csv_path, n_splits=5):
+def run_cross_validation(csv_path, n_splits=10):
     print("=" * 60)
     print(f"=== {n_splits}-FOLD CROSS VALIDATION START ===")
     print("=" * 60)
@@ -26,7 +26,7 @@ def run_cross_validation(csv_path, n_splits=5):
         y_train, y_val = y[train_index], y[val_index]
 
         # Initialize a FRESH model for this fold
-        recognizer = GestureRecognizer(n_estimators=100)
+        recognizer = GestureRecognizer(n_estimators=1000)
         
         # Train using your class method
         recognizer.train(X_train, y_train)
@@ -51,5 +51,5 @@ def run_cross_validation(csv_path, n_splits=5):
 
 if __name__ == "__main__":
     # csv with all training data
-    dataset_path = "tiny_HaGRID/full_tiny_HaGRID.csv" 
+    dataset_path = "tiny_HaGRID\learning\learning_set.csv" 
     run_cross_validation(dataset_path)

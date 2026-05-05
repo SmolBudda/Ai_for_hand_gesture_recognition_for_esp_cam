@@ -1,0 +1,22 @@
+======================================================================
+RAPORT: ZAAWANSOWANY GRID SEARCH COARSE-TO-FINE
+======================================================================
+
+Data i czas: 2026-05-04 23:19:35
+
+NAJLEPSZE ZNALEZIONE PARAMETRY:
+----------------------------------------------------------------------
+  max_depth: 20
+  max_features: sqrt
+  min_samples_leaf: 1
+  min_samples_split: 5
+  n_estimators: 500
+
+Najlepszy F1-Score (walidacja krzyżowa): 0.6699
+
+WYNIKI NA ZBIORZE TESTOWYM:
+----------------------------------------------------------------------
+  Accuracy:  0.6708 (67.08%)
+  Precision: 0.6821
+  Recall:    0.6708
+  F1-Score:  0.6710
