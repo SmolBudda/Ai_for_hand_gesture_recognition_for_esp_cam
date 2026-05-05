@@ -49,21 +49,22 @@ class AdvancedGridSearchCoarseFine:
         print("FAZA 1: GRID SEARCH COARSE (Szerokie zakresy)")
         print("="*70)
         
-        # coarse_params = {
-        #     'n_estimators': [50, 75, 100, 150, 200, 300, 400, 500],
-        #     'max_depth': [5, 8, 10, 15, 20, 30, 40, 50, None],
-        #     'min_samples_split': [2, 3, 4, 5, 7, 10],
-        #     'min_samples_leaf': [1, 2, 3, 4, 5],
-        #     'max_features': ['sqrt', 'log2', None]
-        # }
-        
         coarse_params = {
-            'n_estimators': [50, 100, 200, 500],
-            'max_depth': [5, 10, 20, 50, None],
-            'min_samples_split': [2, 5, 7, 10],
-            'min_samples_leaf': [1, 2, 4, 5],
+            'n_estimators': [50, 75, 100, 150, 200, 300, 400, 500],
+            'max_depth': [5, 8, 10, 15, 20, 30, 40, 50, None],
+            'min_samples_split': [2, 3, 4, 5, 7, 10],
+            'min_samples_leaf': [1, 2, 3, 4, 5],
             'max_features': ['sqrt', 'log2', None]
         }
+        
+        # coarse_params = {
+        #     'n_estimators': [50, 100, 200, 500],
+            
+        #     'max_depth': [5, 10, 20, 50, None],
+        #     'min_samples_split': [2, 5, 7, 10],
+        #     'min_samples_leaf': [1, 2, 4, 5],
+        #     'max_features': ['sqrt', 'log2', None]
+        # }
 
 
 
@@ -75,7 +76,7 @@ class AdvancedGridSearchCoarseFine:
             total_combinations *= len(values)
         print(f"\n  💡 Liczba kombinacji do testowania: {total_combinations}")
         print(f"  💡 Z walidacją krzyżową (5-fold): ~{total_combinations * 5} treningów")
-        print(f"  ⏱️  To może potrwać 10-30 minut w zależności od rozmiaru danych...")
+        #print(f"  ⏱️  To może potrwać 10-30 minut w zależności od rozmiaru danych...")
         
         # Grid Search
         rf_base = RandomForestClassifier(random_state=self.random_state, n_jobs=-1)
@@ -461,15 +462,15 @@ class AdvancedGridSearchCoarseFine:
         print("\n" + "="*70)
         print("ZAAWANSOWANY GRID SEARCH METODĄ COARSE-TO-FINE")
         print("="*70)
-        print("\n📊 INFORMACJA O TRENINGU:")
-        print("  • COARSE: ~5670 kombinacji parametrów")
-        print("  • FINE: ~20-50 kombinacji parametrów")
-        print("  • Każda kombinacja testowana z K-Fold=5")
-        print("  • ŁĄCZNIE: ~28000-30000 treningów modeli")
-        print("\n⏱️  SZACUNKOWY CZAS:")
-        print("  • FAZA COARSE: 10-30 minut")
-        print("  • FAZA FINE: 2-10 minut")
-        print("  • RAZEM: 15-40 minut")
+        # print("\n📊 INFORMACJA O TRENINGU:")
+        # print("  • COARSE: ~5670 kombinacji parametrów")
+        # print("  • FINE: ~20-50 kombinacji parametrów")
+        # print("  • Każda kombinacja testowana z K-Fold=5")
+        # print("  • ŁĄCZNIE: ~28000-30000 treningów modeli")
+        # print("\n⏱️  SZACUNKOWY CZAS:")
+        # print("  • FAZA COARSE: 10-30 minut")
+        # print("  • FAZA FINE: 2-10 minut")
+        # print("  • RAZEM: 15-40 minut")
         print("\n💾 WYNIKI BĘDĄ ZAPISANE W:")
         print("  • best_model_coarse_to_fine.pkl")
         print("  • grid_search_coarse_to_fine_results.png")
