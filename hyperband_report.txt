@@ -1,0 +1,28 @@
+======================================================================
+RAPORT: OPTYMALIZACJA HYPERBAND (Successive Halving)
+======================================================================
+
+Data i czas: 2026-05-14 18:18:56
+
+METODOLOGIA:
+----------------------------------------------------------------------
+Hyperband iteracyjnie testuje kombinacje parametrów i eliminuje
+najsłabsze kombinacje, inwestując więcej zasobów w obiecujące.
+To znacznie szybsze niż tradycyjny Grid Search.
+
+NAJLEPSZE ZNALEZIONE PARAMETRY:
+----------------------------------------------------------------------
+  max_depth: 40
+  max_features: None
+  min_samples_leaf: 1
+  min_samples_split: 5
+  n_estimators: 150
+
+Najlepszy F1-Score: 0.5948
+
+WYNIKI NA ZBIORZE TESTOWYM:
+----------------------------------------------------------------------
+  Accuracy:  0.7174 (71.74%)
+  Precision: 0.7239
+  Recall:    0.7174
+  F1-Score:  0.7164

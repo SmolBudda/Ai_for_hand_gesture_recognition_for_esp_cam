@@ -2,7 +2,7 @@
 RAPORT: ZAAWANSOWANY GRID SEARCH COARSE-TO-FINE
 ======================================================================
 
-Data i czas: 2026-05-05 20:18:29
+Data i czas: 2026-05-14 17:38:55
 
 NAJLEPSZE ZNALEZIONE PARAMETRY:
 ----------------------------------------------------------------------

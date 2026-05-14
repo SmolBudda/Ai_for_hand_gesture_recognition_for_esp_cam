@@ -459,6 +459,9 @@ class AdvancedGridSearchCoarseFine:
     
     def run_full_pipeline(self, learning_set_path, testing_set_path):
         """Uruchomienie pełnego pipeline'u"""
+        # 🕐 POCZĄTEK POMIARU CZASU
+        pipeline_start_time = time.time()
+        
         print("\n" + "="*70)
         print("ZAAWANSOWANY GRID SEARCH METODĄ COARSE-TO-FINE")
         print("="*70)
@@ -509,6 +512,10 @@ class AdvancedGridSearchCoarseFine:
         # Zapisanie raportu
         self.save_summary_report()
         
+        # 🕐 KONIEC POMIARU CZASU
+        pipeline_end_time = time.time()
+        pipeline_elapsed = pipeline_end_time - pipeline_start_time
+        
         # Podsumowanie
         print("\n" + "="*70)
         print("PODSUMOWANIE")
@@ -521,7 +528,19 @@ class AdvancedGridSearchCoarseFine:
         print(f"\n💾 Model zapisany: best_model_coarse_to_fine.pkl")
         print(f"📈 Wykresy zapisane: grid_search_coarse_to_fine_results.png")
         print(f"📄 Raport zapisany: grid_search_report.txt")
+        print(f"\n⏱️  CAŁKOWITY CZAS WYKONANIA: {pipeline_elapsed:.2f} sekund ({pipeline_elapsed/60:.2f} minut)")
         print("\n✓ Pipeline zakończony pomyślnie!")
+        
+        # Zwrócenie metryki czasu dla porównania
+        return {
+            'elapsed_time': pipeline_elapsed,
+            'accuracy': test_results['accuracy'],
+            'precision': test_results['precision'],
+            'recall': test_results['recall'],
+            'f1': test_results['f1'],
+            'best_params': self.best_params,
+            'method': 'Grid Search Coarse-to-Fine'
+        }
 
 
 def main():
@@ -532,15 +551,16 @@ def main():
     # Sprawdzenie czy pliki istnieją
     if not os.path.exists(learning_set_path):
         print(f"Błąd: Plik {learning_set_path} nie znaleziony!")
-        return
+        return None
     
     if not os.path.exists(testing_set_path):
         print(f"Błąd: Plik {testing_set_path} nie znaleziony!")
-        return
+        return None
     
     # Uruchomienie
     grid_search = AdvancedGridSearchCoarseFine(random_state=42)
-    grid_search.run_full_pipeline(learning_set_path, testing_set_path)
+    results = grid_search.run_full_pipeline(learning_set_path, testing_set_path)
+    return results
 
 
 if __name__ == "__main__":
