@@ -2,6 +2,9 @@ import os
 import csv
 import cv2
 import mediapipe as mp
+from mediapipe.tasks import python
+from mediapipe.tasks.python import vision
+from mediapipe import Image
 from pathlib import Path
 from tqdm import tqdm
 
@@ -10,14 +13,27 @@ def scan_dataset_to_csv(dataset_path, csv_output_path):
     Skanuje strukturę folderów, wyciąga punkty charakterystyczne MediaPipe 
     i zapisuje wszystko do jednego pliku CSV.
     """
+
+    BaseOptions = python.BaseOptions
+    HandLandmarker = vision.HandLandmarker
+    HandLandmarkerOptions = vision.HandLandmarkerOptions
+    RunningMode = vision.RunningMode
     
-    # 1. Inicjalizacja MediaPipe
-    mp_hands = mp.solutions.hands
-    hands = mp_hands.Hands(
-        static_image_mode=True, 
-        max_num_hands=1, 
-        min_detection_confidence=0.5
+    # Ścieżka do modelu (znajduje się w tym samym folderze co skrypt)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    model_path = os.path.join(script_dir, "../models/hand_landmarker.task")
+    
+    if not os.path.exists(model_path):
+        print(f"Błąd: Nie znaleziono pliku modelu hand_landmarker.task w folderze {script_dir}")
+        return
+
+    options = HandLandmarkerOptions(
+        base_options=BaseOptions(model_asset_path=model_path),
+        running_mode=RunningMode.IMAGE,
+        num_hands=2,
+        min_hand_detection_confidence=0.5
     )
+    hands = HandLandmarker.create_from_options(options)
     
     # Obsługiwane rozszerzenia plików
     valid_extensions = {'.jpg', '.jpeg', '.png', '.bmp', '.webp'}
@@ -31,7 +47,7 @@ def scan_dataset_to_csv(dataset_path, csv_output_path):
         writer = csv.writer(f)
         header = []
         for i in range(21):
-            header.extend([f'x{i}', f'y{i}', f'z{i}'])
+            header.extend([f'x{i}', f'y{i}'])
         header.append('label')
         writer.writerow(header)
     
@@ -60,14 +76,15 @@ def scan_dataset_to_csv(dataset_path, csv_output_path):
                 continue
                 
             img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            results = hands.process(img_rgb)
+            mp_image = Image(image_format=mp.ImageFormat.SRGB, data=img_rgb)
+            results = hands.detect(mp_image)
             
-            if results.multi_hand_landmarks:
-                hand_landmarks = results.multi_hand_landmarks[0]
+            if results.hand_landmarks:
+                hand_landmarks = results.hand_landmarks[0]
                 landmarks_row = []
                 
-                for lm in hand_landmarks.landmark:
-                    landmarks_row.extend([lm.x, lm.y, lm.z])
+                for lm in hand_landmarks:
+                    landmarks_row.extend([lm.x, lm.y])
                 
                 landmarks_row.append(label)
                 
@@ -91,4 +108,4 @@ def scan_dataset_to_csv(dataset_path, csv_output_path):
 
 # --- PRZYKŁAD UŻYCIA ---
 # Załóżmy, że Twoje foldery leżą w 'dataset/', a plik chcesz nazwać 'gesty.csv'
-# scan_dataset_to_csv('dataset', 'gesty.csv')
+scan_dataset_to_csv('/home/matylda/aPrywatne/Ai_for_hand_gesture_recognition_for_esp_cam/tiny_HaGRID/learning/', 'output/gesty.csv')
