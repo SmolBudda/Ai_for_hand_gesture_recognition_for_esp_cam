@@ -347,10 +347,10 @@ def main():
     
     # Próbuj załadować najlepszy dostępny model
     model_paths = [
-        os.path.join(script_dir, "best_model_hyperband.pkl"),
-        os.path.join(script_dir, "best_model_coarse_to_fine.pkl"),
-        os.path.join(script_dir, "gesture_model_optimized_grid_search.pkl"),
-        os.path.join(script_dir, "gesture_model_random_forest.pkl"),
+        os.path.join(script_dir, "models/best_model_hyperband.pkl"),
+        os.path.join(script_dir, "models/best_model_coarse_to_fine.pkl"),
+        os.path.join(script_dir, "models/gesture_model_optimized_grid_search.pkl"),
+        os.path.join(script_dir, "models/gesture_model_random_forest.pkl"),
     ]
     
     model_path = None
