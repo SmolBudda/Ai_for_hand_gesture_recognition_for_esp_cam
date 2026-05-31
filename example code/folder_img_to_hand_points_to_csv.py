@@ -37,7 +37,7 @@ def process_folder_to_csv(folder_path, csv_output_path, label):
 
     # Ścieżka do modelu (znajduje się w tym samym folderze co skrypt)
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    model_path = os.path.join(script_dir, "hand_landmarker.task")
+    model_path = os.path.join(script_dir, "../models/hand_landmarker.task")
     
     if not os.path.exists(model_path):
         print(f"Błąd: Nie znaleziono pliku modelu hand_landmarker.task w folderze {script_dir}")
@@ -46,7 +46,7 @@ def process_folder_to_csv(folder_path, csv_output_path, label):
     options = HandLandmarkerOptions(
         base_options=BaseOptions(model_asset_path=model_path),
         running_mode=RunningMode.IMAGE,
-        num_hands=1,
+        num_hands=2,
         min_hand_detection_confidence=0.5
     )
     
@@ -64,8 +64,9 @@ def process_folder_to_csv(folder_path, csv_output_path, label):
         # Jeśli plik jest nowy, tworzymy nagłówek
         if not file_exists:
             header = []
-            for i in range(21):
-                header.extend([f'x{i}', f'y{i}'])
+            for j in range(2):
+                for i in range(21): 
+                    header.extend([f'x{j}_{i}', f'y{j}_{i}'])
             header.append('label')
             writer.writerow(header)
             

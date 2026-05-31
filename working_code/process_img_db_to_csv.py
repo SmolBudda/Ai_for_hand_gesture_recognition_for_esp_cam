@@ -46,7 +46,7 @@ def scan_dataset_to_csv(dataset_path, csv_output_path):
     with open(csv_output_path, mode='w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         header = []
-        for i in range(21):
+        for i in range(42):
             header.extend([f'x{i}', f'y{i}'])
         header.append('label')
         writer.writerow(header)
@@ -79,13 +79,41 @@ def scan_dataset_to_csv(dataset_path, csv_output_path):
             mp_image = Image(image_format=mp.ImageFormat.SRGB, data=img_rgb)
             results = hands.detect(mp_image)
             
-            if results.hand_landmarks:
-                hand_landmarks = results.hand_landmarks[0]
+            # if results.hand_landmarks:
+            #     hand_landmarks = results.hand_landmarks[0]
+            #     landmarks_row = []
+                
+            #     for lm in hand_landmarks:
+            #         landmarks_row.extend([lm.x, lm.y])
+                
+            #     landmarks_row.append(label)
+                
+            #     # Dopisanie wiersza do pliku CSV
+            #     with open(csv_output_path, mode='a', newline='', encoding='utf-8') as f:
+            #         writer = csv.writer(f)
+            #         writer.writerow(landmarks_row)
+                
+            #     processed_count += 1
+            # else:
+            #     # MediaPipe nie zawsze wykryje dłoń (np. słabe światło, ucięte palce)
+            #     skipped_count += 1
+
+            if results.hand_landmarks and len(results.hand_landmarks) > 0:
                 landmarks_row = []
+                num_detected_hands = len(results.hand_landmarks)
                 
-                for lm in hand_landmarks:
-                    landmarks_row.extend([lm.x, lm.y])
+                # Przechodzimy przez maksymalnie 2 dłonie
+                for i in range(2):
+                    if i < num_detected_hands:
+                        # Pobieramy punkty dla wykrytej dłoni (pierwszej lub drugiej)
+                        hand_landmarks = results.hand_landmarks[i]
+                        for lm in hand_landmarks:
+                            landmarks_row.extend([lm.x, lm.y])
+                    else:
+                        # Jeśli brakuje drugiej dłoni, dopełniamy wiersz pustymi wartościami (21 punktów * 2 współrzędne = 42)
+                        landmarks_row.extend([''] * 42)
                 
+                # Na samym końcu dodajemy etykietę klasy
                 landmarks_row.append(label)
                 
                 # Dopisanie wiersza do pliku CSV
@@ -108,4 +136,4 @@ def scan_dataset_to_csv(dataset_path, csv_output_path):
 
 # --- PRZYKŁAD UŻYCIA ---
 # Załóżmy, że Twoje foldery leżą w 'dataset/', a plik chcesz nazwać 'gesty.csv'
-scan_dataset_to_csv('/home/matylda/aPrywatne/Ai_for_hand_gesture_recognition_for_esp_cam/tiny_HaGRID/learning/', 'output/gesty.csv')
+scan_dataset_to_csv('./tiny_HaGRID/learning', './tiny_HaGRID/learning/learning_set_2hands.csv')
