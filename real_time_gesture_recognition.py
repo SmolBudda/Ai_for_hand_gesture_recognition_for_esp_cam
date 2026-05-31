@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-🎯 Real-time Gesture Recognition with Smoothing
+Real-time Gesture Recognition with Smoothing
 Wykrywanie gestów na bieżąco z wygładzaniem na podstawie wielu próbek
 """
 
@@ -33,9 +33,9 @@ class RealTimeGestureRecognizer:
         self.confidence_threshold = confidence_threshold
         
         # Wczytanie modelu
-        print(f"📦 Ładowanie modelu z: {model_path}")
+        print(f"Ładowanie modelu z: {model_path}")
         if not os.path.exists(model_path):
-            raise FileNotFoundError(f"❌ Model nie znaleziony: {model_path}")
+            raise FileNotFoundError(f"!!! Model nie znaleziony: {model_path}")
         
         with open(model_path, 'rb') as f:
             self.model = pickle.load(f)
@@ -73,7 +73,7 @@ class RealTimeGestureRecognizer:
         model_path = os.path.join(script_dir, "example code", "hand_landmarker.task")
         
         if not os.path.exists(model_path):
-            raise FileNotFoundError(f"❌ Błąd: Model hand_landmarker.task nie znaleziony w {script_dir}/example code/")
+            raise FileNotFoundError(f"!!! Błąd: Model hand_landmarker.task nie znaleziony w {script_dir}/example code/")
         
         options = HandLandmarkerOptions(
             base_options=BaseOptions(model_asset_path=model_path),
@@ -213,7 +213,7 @@ class RealTimeGestureRecognizer:
     def run(self):
         """Główna pętla do wykrywania gestów"""
         print("="*70)
-        print("🎯 REAL-TIME GESTURE RECOGNITION")
+        print("REAL-TIME GESTURE RECOGNITION")
         print("="*70)
         print(f"Buffer size: {self.buffer_size} próbek (wygładzanie)")
         print(f"Confidence threshold: {self.confidence_threshold}")
@@ -227,7 +227,7 @@ class RealTimeGestureRecognizer:
         cap = cv2.VideoCapture(0)
         
         if not cap.isOpened():
-            print("❌ Błąd: Nie można otworzyć kamery!")
+            print("!!! Błąd: Nie można otworzyć kamery!")
             return
         
         # Ustawienia kamery
@@ -237,8 +237,8 @@ class RealTimeGestureRecognizer:
         frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
         
-        print(f"📷 Kamera uruchomiona ({frame_width}x{frame_height})")
-        print("⏳ Pokaż dłoń do kamery...\n")
+        print(f"Kamera uruchomiona ({frame_width}x{frame_height})")
+        print("Pokaż dłoń do kamery...\n")
         
         paused = False
         
@@ -247,7 +247,7 @@ class RealTimeGestureRecognizer:
                 ret, frame = cap.read()
                 
                 if not ret:
-                    print("❌ Błąd: Nie można wczytać klatki!")
+                    print("!!! Błąd: Nie można wczytać klatki!")
                     break
                 
                 # Lustrzane odbicie
@@ -330,10 +330,10 @@ class RealTimeGestureRecognizer:
                     print(f"⏸ Pauza: {'ON' if paused else 'OFF'}")
                 elif key == ord('r') or key == ord('R'):
                     self.prediction_buffer.clear()
-                    print("🔄 Buffer resetowany!")
+                    print("Buffer resetowany!")
         
         except Exception as e:
-            print(f"❌ Błąd: {e}")
+            print(f"!!! Błąd: {e}")
         
         finally:
             cap.release()
@@ -361,7 +361,7 @@ def main():
             break
     
     if model_path is None:
-        print("❌ Błąd: Nie znaleziono żadnego wytrenowanego modelu!")
+        print("!!! Błąd: Nie znaleziono żadnego wytrenowanego modelu!")
         print("Dostępne modele powinny być w:")
         for path in model_paths:
             print(f"  - {path}")
@@ -376,10 +376,10 @@ def main():
         )
         recognizer.run()
     except FileNotFoundError as e:
-        print(f"❌ {e}")
+        print(f"!!! {e}")
         return
     except Exception as e:
-        print(f"❌ Błąd: {e}")
+        print(f"!!! Błąd: {e}")
         return
 
 
