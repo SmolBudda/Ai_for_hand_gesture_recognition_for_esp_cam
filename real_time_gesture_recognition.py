@@ -70,7 +70,7 @@ class RealTimeGestureRecognizer:
         
         # Ścieżka do modelu MediaPipe
         script_dir = os.path.dirname(os.path.abspath(__file__))
-        model_path = os.path.join(script_dir, "example code", "hand_landmarker.task")
+        model_path = os.path.join(script_dir, "models", "hand_landmarker.task")
         
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"!!! Błąd: Model hand_landmarker.task nie znaleziony w {script_dir}/example code/")
@@ -286,7 +286,7 @@ class RealTimeGestureRecognizer:
                         
                         if best_gesture is not None and avg_confidence >= self.confidence_threshold:
                             # Zielony tekst dla silnych predykcji
-                            color = (0, 255, 0) if avg_confidence >= 0.7 else (0, 165, 255)  # Zielony/Orange
+                            color = (0, 255, 0) if avg_confidence >= 0.7 else (0, 165, 255)  # Zielony/Pomarańczowy
                             
                             text = f"Hand {hand_idx + 1}: {best_gesture.upper()}"
                             conf_text = f"Conf: {avg_confidence:.2f} ({vote_count}/{self.buffer_size})"
@@ -333,7 +333,7 @@ class RealTimeGestureRecognizer:
                     print("Buffer resetowany!")
         
         except Exception as e:
-            print(f"!!! Błąd: {e}")
+            print(f"!!! Błąd pętli kamery: {e}")
         
         finally:
             cap.release()
@@ -352,7 +352,7 @@ def main():
         os.path.join(script_dir, "models/gesture_model_optimized_grid_search.pkl"),
         os.path.join(script_dir, "models/gesture_model_random_forest.pkl"),
     ]
-    
+
     model_path = None
     for path in model_paths:
         if os.path.exists(path):
@@ -379,7 +379,7 @@ def main():
         print(f"!!! {e}")
         return
     except Exception as e:
-        print(f"!!! Błąd: {e}")
+        print(f"!!! Błąd inicjalizacji: {e}")
         return
 
 
