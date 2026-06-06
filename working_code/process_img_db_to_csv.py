@@ -136,4 +136,4 @@ def scan_dataset_to_csv(dataset_path, csv_output_path):
 
 # --- PRZYKŁAD UŻYCIA ---
 # Załóżmy, że Twoje foldery leżą w 'dataset/', a plik chcesz nazwać 'gesty.csv'
-scan_dataset_to_csv('./tiny_HaGRID/learning', './tiny_HaGRID/learning/learning_set_2hands.csv')
+scan_dataset_to_csv('./tiny_HaGRID/testing', './tiny_HaGRID/testing/testing_set_2hands.csv')

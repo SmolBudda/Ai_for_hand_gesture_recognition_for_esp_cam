@@ -135,9 +135,9 @@ def main():
     print("=" * 60)
     
     # Ścieżki do plików
-    learning_set_path = "tiny_HaGRID/learning/learning_set.csv"
-    testing_set_path = "tiny_HaGRID/testing/testing_set.csv"
-    model_save_path = "gesture_model_random_forest.pkl"
+    learning_set_path = "tiny_HaGRID/learning/learning_set_2hands.csv"
+    testing_set_path = "tiny_HaGRID/testing/testing_set_2hands.csv"
+    model_save_path = "models/2hands_gesture_model_random_forest.pkl"
     
     # Sprawdzenie czy pliki istnieją
     if not os.path.exists(learning_set_path):
@@ -213,8 +213,9 @@ def main():
         plt.ylim([0, 1.1])
         
         plt.tight_layout()
-        plt.savefig('gesture_recognition_results.png', dpi=150)
-        print("✓ Wykresy zapisane: gesture_recognition_results.png")
+        results_png_path = "output/2hands_gesture_recognition_results.png"
+        plt.savefig(results_png_path, dpi=150)
+        print(f"✓ Wykresy zapisane: {results_png_path}")
         plt.show()
     
     except Exception as e:
@@ -233,7 +234,7 @@ def main():
     print(f"   Recall:    {test_results['recall']:.4f}")
     print(f"   F1-Score:  {test_results['f1']:.4f}")
     print(f"\n💾 Model zapisany: {model_save_path}")
-    print(f"\n📈 Wykresy zapisane: gesture_recognition_results.png")
+    print(f"\n📈 Wykresy zapisane: {results_png_path}")
     print("\n✓ Trening zakończony pomyślnie!")
     
 

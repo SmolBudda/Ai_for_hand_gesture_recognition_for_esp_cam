@@ -357,8 +357,9 @@ def visualize_grid_search_results(recognizer, X_test, y_test, results):
             verticalalignment='center', bbox=dict(boxstyle='round', facecolor='lightblue', alpha=0.5))
     
     plt.tight_layout()
-    plt.savefig('grid_search_results.png', dpi=150, bbox_inches='tight')
-    print("✓ Wykresy zapisane: grid_search_results.png")
+    results_png_path = "output/2hands_grid_search_results.png"
+    plt.savefig(results_png_path, dpi=150, bbox_inches='tight')
+    print(f"✓ Wykresy zapisane: {results_png_path}")
     plt.show()
 
 
@@ -368,9 +369,10 @@ def main():
     print("=" * 70)
     
     # Ścieżki do plików
-    learning_set_path = "tiny_HaGRID/learning/learning_set.csv"
-    testing_set_path = "tiny_HaGRID/testing/testing_set.csv"
-    model_save_path = "gesture_model_optimized_grid_search.pkl"
+    learning_set_path = "tiny_HaGRID/learning/learning_set_2hands.csv"
+    testing_set_path = "tiny_HaGRID/testing/testing_set_2hands.csv"
+    model_save_path = "models/2hands_gesture_model_optimized_grid_search.pkl"
+    results_png_path = "output/2hands_grid_search_results.png"
     
     # Sprawdzenie czy pliki istnieją
     if not os.path.exists(learning_set_path):
@@ -426,7 +428,7 @@ def main():
         print(f"   • {key}: {value}")
     
     print(f"\n💾 Model zapisany: {model_save_path}")
-    print(f"📈 Wykresy zapisane: grid_search_results.png")
+    print(f"📈 Wykresy zapisane: {results_png_path}")
     print("\n✓ Grid Search zakończony pomyślnie!")
     
 
