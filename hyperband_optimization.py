@@ -11,6 +11,11 @@ import pickle
 import time
 from datetime import datetime
 
+#ścieżki
+model_save_path = "models/2hands_best_model_hyperband.pkl"
+results_png_path = "output/2hands_hyperband_optimization_results.png"
+results_report_path = "output/2hands_hyperband_report.txt"
+
 class HyperbandOptimization:
     def __init__(self, random_state=42, resource='n_samples', factor=3):
         """
@@ -78,8 +83,8 @@ class HyperbandOptimization:
             total_combinations *= len(values)
         
         print(f"\n  💡 Maksymalna liczba kombinacji: {total_combinations}")
-        print(f"  💡 Metoda Hyperband eliminuje słabe kombinacje wcześnie")
-        print(f"  ⏱️  To powinno być szybsze niż Grid Search Coarse-to-Fine!")
+        # print(f"  💡 Metoda Hyperband eliminuje słabe kombinacje wcześnie")
+        # print(f"  ⏱️  To powinno być szybsze niż Grid Search Coarse-to-Fine!")
         
         # Konfiguracja Hyperband
         rf_base = RandomForestClassifier(random_state=self.random_state, n_jobs=-1)
@@ -197,10 +202,10 @@ class HyperbandOptimization:
                     if val is not None:
                         print(f"      {val}: {score:.4f}")
         
-        print(f"\n💡 Wnioski:")
-        print(f"   - Hyperband efektywnie identyfikuje najlepsze parametry")
-        print(f"   - Eliminuje słabe kombinacje wcześnie (budżet czasowy)")
-        print(f"   - Szybciej niż tradycyjny Grid Search")
+        # print(f"\n💡 Wnioski:")
+        # print(f"   - Hyperband efektywnie identyfikuje najlepsze parametry")
+        # print(f"   - Eliminuje słabe kombinacje wcześnie (budżet czasowy)")
+        # print(f"   - Szybciej niż tradycyjny Grid Search")
     
     def visualize_results(self, test_results=None):
         """Wizualizacja wyników optymalizacji Hyperband"""
@@ -348,8 +353,8 @@ class HyperbandOptimization:
                         ha='center', va='bottom', fontweight='bold')
         
         plt.tight_layout()
-        plt.savefig('hyperband_optimization_results.png', dpi=150, bbox_inches='tight')
-        print("✓ Wykresy zapisane: hyperband_optimization_results.png")
+        plt.savefig(results_png_path, dpi=150, bbox_inches='tight')
+        print(f"✓ Wykresy zapisane: {results_png_path}")
         plt.show()
     
     def save_model(self, filepath):
@@ -362,7 +367,7 @@ class HyperbandOptimization:
             pickle.dump(self.best_model, f)
         print(f"✓ Model zapisany: {filepath}")
     
-    def save_summary_report(self, filename='hyperband_report.txt'):
+    def save_summary_report(self, filename=results_report_path):
         """Zapisanie raportu podsumowującego"""
         with open(filename, 'w', encoding='utf-8') as f:
             f.write("="*70 + "\n")
@@ -403,9 +408,9 @@ class HyperbandOptimization:
         print("HYPERBAND OPTIMIZATION - SUCCESSIVE HALVING")
         print("="*70)
         print("\n💾 WYNIKI BĘDĄ ZAPISANE W:")
-        print("  • best_model_hyperband.pkl")
-        print("  • hyperband_optimization_results.png")
-        print("  • hyperband_report.txt")
+        print(f"  • {model_save_path}")
+        print(f"  • {results_png_path}")
+        print(f"  • {results_report_path}")
         print("\n" + "="*70)
         
         # Wczytanie danych
@@ -432,7 +437,7 @@ class HyperbandOptimization:
         self.visualize_results(test_results)
         
         # Zapisanie modelu
-        self.save_model('best_model_hyperband.pkl')
+        self.save_model(model_save_path)
         
         # Zapisanie raportu
         self.save_summary_report()
@@ -450,9 +455,9 @@ class HyperbandOptimization:
         print(f"   Precision: {test_results['precision']:.4f}")
         print(f"   Recall:    {test_results['recall']:.4f}")
         print(f"   F1-Score:  {test_results['f1']:.4f}")
-        print(f"\n💾 Model zapisany: best_model_hyperband.pkl")
-        print(f"📈 Wykresy zapisane: hyperband_optimization_results.png")
-        print(f"📄 Raport zapisany: hyperband_report.txt")
+        print(f"\n💾 Model zapisany: {model_save_path}")
+        print(f"📈 Wykresy zapisane: {results_png_path}")
+        print(f"📄 Raport zapisany: {results_report_path}")
         print(f"\n⏱️  CAŁKOWITY CZAS WYKONANIA: {pipeline_elapsed:.2f} sekund ({pipeline_elapsed/60:.2f} minut)")
         print("\n✓ Pipeline zakończony pomyślnie!")
         
@@ -471,8 +476,8 @@ class HyperbandOptimization:
 
 def main():
     # Ścieżki do plików
-    learning_set_path = "tiny_HaGRID/learning/learning_set.csv"
-    testing_set_path = "tiny_HaGRID/testing/testing_set.csv"
+    learning_set_path = "tiny_HaGRID/learning/learning_set_2hands.csv"
+    testing_set_path = "tiny_HaGRID/testing/testing_set_2hands.csv"
     
     # Sprawdzenie czy pliki istnieją
     if not os.path.exists(learning_set_path):
