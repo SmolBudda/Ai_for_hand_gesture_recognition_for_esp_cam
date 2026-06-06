@@ -94,8 +94,8 @@ class GestureRecognizer:
             'cv_results': grid_coarse.cv_results_
         }
         
-        # ===== ETAP 2: FINE (FINA SIATKA) =====
-        print("\n📊 ETAP 2: FINE GRID SEARCH (siatka fina)")
+        # ===== ETAP 2: FINE (DROBNA SIATKA) =====
+        print("\n📊 ETAP 2: FINE GRID SEARCH (siatka drobna)")
         print("-" * 70)
         print("Precyzyjne tuning wokół najlepszych parametrów...\n")
         
