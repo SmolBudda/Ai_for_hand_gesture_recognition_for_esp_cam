@@ -6,21 +6,26 @@ from pathlib import Path
 # KONFIGURACJA - Zmień te ścieżki na swoje
 # (Użyj przedrostka 'r' przed stringiem, żeby Windows nie miał problemu z ukośnikami)
 # ==========================================
-SOURCE_DIR = r"D:\Ai_for_hand_gesture_recognition_for_esp_cam\tiny_HaGRID\learning"
-TARGET_DIR = r"D:\Ai_for_hand_gesture_recognition_for_esp_cam\tiny_HaGRID\testing"
-FILES_TO_MOVE = 40
+SOURCE_DIR = r"D:\Ai_for_hand_gesture_recognition_for_esp_cam\tiny_HaGRID\full_set"
+LEARNING_DIR = r"D:\Ai_for_hand_gesture_recognition_for_esp_cam\tiny_HaGRID\learning"
+TESTING_DIR = r"D:\Ai_for_hand_gesture_recognition_for_esp_cam\tiny_HaGRID\testing"
+FILES_TO_PICK = 350
+LEARNING_SPLIT = 300
+TESTING_SPLIT = 50
 
-def move_random_files(source, target, num_files):
+def split_files_to_learning_and_testing(source, learning_target, testing_target, num_files, learning_count, testing_count):
     source_path = Path(source)
-    target_path = Path(target)
+    learning_path = Path(learning_target)
+    testing_path = Path(testing_target)
 
     # Sprawdzamy, czy folder źródłowy w ogóle istnieje
     if not source_path.exists():
         print(f"Błąd: Nie znaleziono folderu źródłowego {source_path}")
         return
 
-    # Tworzymy główny folder docelowy, jeśli go jeszcze nie ma
-    target_path.mkdir(parents=True, exist_ok=True)
+    # Tworzymy główne foldery docelowe, jeśli ich jeszcze nie ma
+    learning_path.mkdir(parents=True, exist_ok=True)
+    testing_path.mkdir(parents=True, exist_ok=True)
 
     # Przechodzimy przez wszystkie podfoldery w katalogu źródłowym
     for sub_dir in source_path.iterdir():
@@ -28,11 +33,9 @@ def move_random_files(source, target, num_files):
             print(f"Przetwarzam folder: {sub_dir.name}...")
             
             # Pobieramy wszystkie pliki z danego podfolderu
-            # Jeśli masz tam jakieś pliki systemowe (np. thumbs.db), możesz dodać warunek: 
-            # if f.is_file() and f.suffix.lower() in ['.jpg', '.png']
             files = [f for f in sub_dir.iterdir() if f.is_file()]
             
-            # Zabezpieczenie: jeśli w folderze jest mniej niż 40 plików, bierzemy tyle, ile jest
+            # Zabezpieczenie: jeśli w folderze jest mniej niż wymagana liczba, bierzemy tyle, ile jest
             amount_to_pick = min(num_files, len(files))
             
             if amount_to_pick == 0:
@@ -41,21 +44,32 @@ def move_random_files(source, target, num_files):
 
             # Losujemy pliki
             selected_files = random.sample(files, amount_to_pick)
+            
+            # Dzielimy na learning i testing
+            learning_files = selected_files[:learning_count]
+            testing_files = selected_files[learning_count:learning_count + testing_count]
 
-            # Tworzymy podfolder o tej samej nazwie w miejscu docelowym
-            new_sub_dir = target_path / sub_dir.name
-            new_sub_dir.mkdir(parents=True, exist_ok=True)
+            # Tworzymy podfoldery o tej samej nazwie w miejscach docelowych
+            learning_sub_dir = learning_path / sub_dir.name
+            testing_sub_dir = testing_path / sub_dir.name
+            learning_sub_dir.mkdir(parents=True, exist_ok=True)
+            testing_sub_dir.mkdir(parents=True, exist_ok=True)
 
-            # Przenosimy wylosowane pliki
-            for file in selected_files:
-                destination = new_sub_dir / file.name
-                
-                # ZMIEŃ `shutil.move` na `shutil.copy2`, jeśli wolisz je skopiować zamiast wycinać
-                shutil.move(str(file), str(destination))
-                
-            print(f" -> Przeniesiono {amount_to_pick} plików do {new_sub_dir}")
+            # Kopiujemy pliki do learning
+            for file in learning_files:
+                destination = learning_sub_dir / file.name
+                shutil.copy2(str(file), str(destination))
+            
+            print(f" -> Skopiowano {len(learning_files)} plików do {learning_sub_dir}")
+
+            # Kopiujemy pliki do testing
+            for file in testing_files:
+                destination = testing_sub_dir / file.name
+                shutil.copy2(str(file), str(destination))
+            
+            print(f" -> Skopiowano {len(testing_files)} plików do {testing_sub_dir}")
 
 if __name__ == "__main__":
     print("Rozpoczynam pracę...")
-    move_random_files(SOURCE_DIR, TARGET_DIR, FILES_TO_MOVE)
-    print("Gotowe! Wszystko przeniesione.")
+    split_files_to_learning_and_testing(SOURCE_DIR, LEARNING_DIR, TESTING_DIR, FILES_TO_PICK, LEARNING_SPLIT, TESTING_SPLIT)
+    print("Gotowe! Wszystkie pliki skopiowane.")
