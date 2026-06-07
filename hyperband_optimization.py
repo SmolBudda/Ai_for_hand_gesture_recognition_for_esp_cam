@@ -102,7 +102,7 @@ class HyperbandOptimization:
             n_jobs=-1,
             verbose=1,
             factor=self.factor,  # Ile gorszych kombinacji eliminować
-            min_resources=10,    # Minimalna liczba próbek w pierwszej iteracji
+            min_resources='exhaust', #(wg AI by dobrze liczyło, choć będzie wolniej) # Minimalna liczba próbek w pierwszej iteracji
             resource=self.resource
         )
         
