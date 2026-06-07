@@ -8,15 +8,23 @@ import os
 import pickle
 
 class GestureRecognizer:
-    def __init__(self, n_estimators=100, random_state=42):
+    def __init__(self, n_estimators=100, max_depth=20, max_features=None, min_samples_leaf=3, min_samples_split=2, random_state=42):
         """
-        Inicjalizacja klasyfikatora Random Forest
+        Inicjalizacja klasyfikatora Random Forest z optymalnymi parametrami z Hyperband
         
-        :param n_estimators: Liczba drzew w lesie
+        :param n_estimators: Liczba drzew w lesie (Hyperband: 400)
+        :param max_depth: Maksymalna głębokość drzewa (Hyperband: 20)
+        :param max_features: Liczba cech brana pod uwagę przy podziale (Hyperband: None - wszystkie)
+        :param min_samples_leaf: Minimalna liczba próbek w liściu (Hyperband: 1)
+        :param min_samples_split: Minimalna liczba próbek wymagana do podziału węzła (Hyperband: 2)
         :param random_state: Ziarno losowości dla powtarzalności
         """
         self.model = RandomForestClassifier(
             n_estimators=n_estimators,
+            max_depth=max_depth,
+            max_features=max_features,
+            min_samples_leaf=min_samples_leaf,
+            min_samples_split=min_samples_split,
             random_state=random_state,
             n_jobs=-1,  # Użyj wszystkich procesorów
             verbose=1
@@ -137,7 +145,8 @@ def main():
     # Ścieżki do plików
     learning_set_path = "tiny_HaGRID/learning/learning_set_2hands.csv"
     testing_set_path = "tiny_HaGRID/testing/testing_set_2hands.csv"
-    model_save_path = "models/2hands_gesture_model_random_forest.pkl"
+    model_save_path = "models/2hands_based_on_hyperband_100_estimators_min_samples_leaf_3.pkl"
+    results_png_path = "output/2hands_based_on_hyperband_100_estimators_min_samples_leaf_3.png"
     
     # Sprawdzenie czy pliki istnieją
     if not os.path.exists(learning_set_path):
@@ -149,7 +158,7 @@ def main():
         return
     
     # Inicjalizacja modelu
-    recognizer = GestureRecognizer(n_estimators=100)
+    recognizer = GestureRecognizer()
     
     # Wczytanie danych
     print("\n--- WCZYTYWANIE DANYCH ---")
@@ -213,7 +222,6 @@ def main():
         plt.ylim([0, 1.1])
         
         plt.tight_layout()
-        results_png_path = "output/2hands_gesture_recognition_results.png"
         plt.savefig(results_png_path, dpi=150)
         print(f"✓ Wykresy zapisane: {results_png_path}")
         plt.show()
