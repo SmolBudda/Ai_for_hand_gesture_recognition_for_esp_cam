@@ -1,0 +1,49 @@
+================================================================================
+PORÓWNANIE: GRID SEARCH vs HYPERBAND
+================================================================================
+
+Data i czas: 2026-06-08 10:13:58
+
+TABELA PORÓWNAWCZA
+--------------------------------------------------------------------------------
+             Metryka     Grid Search       Hyperband
+            Accuracy 0.7825 (78.25%) 0.7754 (77.54%)
+           Precision          0.7833          0.7752
+              Recall          0.7825          0.7754
+            F1-Score          0.7804          0.7730
+  Czas wykonania (s)         4444.88         1303.53
+Czas wykonania (min)           74.08           21.73
+
+ANALIZA PRZYSPIESZENIA
+--------------------------------------------------------------------------------
+Grid Search czas: 4444.88s (74.08min)
+Hyperband czas: 1303.53s (21.73min)
+Przyspieszenie: 3.41x
+Oszczędność czasu: 3141.35s
+
+RÓŻNICA W DOKŁADNOŚCI
+--------------------------------------------------------------------------------
+Accuracy: 0.0072 (0.72%)
+F1-Score: 0.0075
+
+PARAMETRY GRID SEARCH
+--------------------------------------------------------------------------------
+  max_depth: 40
+  max_features: None
+  min_samples_leaf: 2
+  min_samples_split: 2
+  n_estimators: 300
+
+PARAMETRY HYPERBAND
+--------------------------------------------------------------------------------
+  max_depth: None
+  max_features: None
+  min_samples_leaf: 1
+  min_samples_split: 2
+  n_estimators: 200
+
+WNIOSKI
+--------------------------------------------------------------------------------
+1. Szybkość: Hyperband jest 3.41x szybszy
+2. Dokładność: Wyniki praktycznie identyczne
+3. Zalecenie: HYPERBAND jest lepszym wyborem (szybszy, równie dokładny)

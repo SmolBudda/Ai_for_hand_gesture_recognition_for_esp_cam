@@ -51,5 +51,5 @@ def run_cross_validation(csv_path, n_splits=10):
 
 if __name__ == "__main__":
     # csv with all training data
-    dataset_path = "tiny_HaGRID\learning\learning_set.csv" 
+    dataset_path = "tiny_HaGRID/learning/learning_set_2hands.csv" 
     run_cross_validation(dataset_path)

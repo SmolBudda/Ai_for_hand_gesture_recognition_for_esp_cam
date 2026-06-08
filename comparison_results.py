@@ -355,8 +355,8 @@ class ComparisonRunner:
 
 def main():
     # Ścieżki do plików
-    learning_set_path = "tiny_HaGRID/learning/learning_set.csv"
-    testing_set_path = "tiny_HaGRID/testing/testing_set.csv"
+    learning_set_path = "tiny_HaGRID/learning/learning_set_2hands.csv"
+    testing_set_path = "tiny_HaGRID/testing/testing_set_2hands.csv"
     
     # Sprawdzenie czy pliki istnieją
     if not os.path.exists(learning_set_path):

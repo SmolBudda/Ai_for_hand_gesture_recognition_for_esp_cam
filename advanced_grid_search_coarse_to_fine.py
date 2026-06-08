@@ -50,10 +50,10 @@ class AdvancedGridSearchCoarseFine:
         print("="*70)
         
         coarse_params = {
-            'n_estimators': [50, 75, 100, 150, 200, 300, 400, 500],
-            'max_depth': [5, 8, 10, 15, 20, 30, 40, 50, None],
-            'min_samples_split': [2, 3, 4, 5, 7, 10],
-            'min_samples_leaf': [1, 2, 3, 4, 5],
+            'n_estimators': [100, 200, 400],
+            'max_depth': [10, 20, 40, None],
+            'min_samples_split': [2, 5, 10],
+            'min_samples_leaf': [1, 3, 5],
             'max_features': ['sqrt', 'log2', None]
         }
         
@@ -545,8 +545,8 @@ class AdvancedGridSearchCoarseFine:
 
 def main():
     # Ścieżki do plików
-    learning_set_path = "tiny_HaGRID/learning/learning_set.csv"
-    testing_set_path = "tiny_HaGRID/testing/testing_set.csv"
+    learning_set_path = "tiny_HaGRID/learning/learning_set_2hands.csv"
+    testing_set_path = "tiny_HaGRID/testing/testing_set_2hands.csv"
     
     # Sprawdzenie czy pliki istnieją
     if not os.path.exists(learning_set_path):
