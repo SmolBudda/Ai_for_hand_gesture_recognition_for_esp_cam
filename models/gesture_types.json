@@ -1,0 +1,17 @@
+{
+  "two_up": "single_hand",
+  "middle_finger": "single_hand",
+  "like": "single_hand",
+  "peace": "single_hand",
+  "one": "single_hand",
+  "holy": "single_hand",
+  "fist": "single_hand",
+  "take_picture": "two_hands",
+  "dislike": "single_hand",
+  "no_gesture": "single_hand",
+  "call": "single_hand",
+  "point": "single_hand",
+  "rock": "single_hand",
+  "stop": "single_hand",
+  "ok": "single_hand"
+}
