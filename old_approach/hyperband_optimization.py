@@ -11,10 +11,13 @@ import pickle
 import time
 from datetime import datetime
 
+# Określenie katalogu bazowego (gdzie znajduje się ten skrypt)
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 #ścieżki
-model_save_path = "models/2hands_best_model_hyperband.pkl"
-results_png_path = "output/2hands_hyperband_optimization_results.png"
-results_report_path = "output/2hands_hyperband_report.txt"
+model_save_path = os.path.join(SCRIPT_DIR, "models", "2hands_best_model_hyperband.pkl")
+results_png_path = os.path.join(SCRIPT_DIR, "output", "2hands_hyperband_optimization_results.png")
+results_report_path = os.path.join(SCRIPT_DIR, "output", "2hands_hyperband_report.txt")
 
 class HyperbandOptimization:
     def __init__(self, random_state=42, resource='n_samples', factor=3):
@@ -212,8 +215,8 @@ class HyperbandOptimization:
         print("\n--- GENEROWANIE WYKRESÓW ---")
         
         # Upewnienie się, że foldery istnieją
-        os.makedirs("output", exist_ok=True)
-        os.makedirs("models", exist_ok=True)
+        os.makedirs(os.path.dirname(results_png_path), exist_ok=True)
+        os.makedirs(os.path.dirname(model_save_path), exist_ok=True)
         
         fig = plt.figure(figsize=(16, 10))
         
