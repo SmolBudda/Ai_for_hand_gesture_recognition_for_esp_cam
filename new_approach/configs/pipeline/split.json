@@ -1,0 +1,9 @@
+{
+  "folds": 5,
+  "ratios": {
+    "test": 0.15,
+    "train": 0.7,
+    "val": 0.15
+  },
+  "seed": 42
+}

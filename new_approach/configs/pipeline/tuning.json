@@ -1,0 +1,95 @@
+{
+  "subset_fraction": 1.0,
+  "grid_search": {
+    "parameters": {
+      "n_estimators": {
+        "count": 4,
+        "max": 300,
+        "min": 50,
+        "type": "int"
+      },
+      "max_depth": {
+        "count": 4,
+        "include_unlimited": true,
+        "max": 20,
+        "min": 8,
+        "type": "int"
+      },
+      "min_samples_leaf": {
+        "count": 4,
+        "max": 10,
+        "min": 1,
+        "type": "int"
+      },
+      "min_samples_split": {
+        "count": 4,
+        "max": 10,
+        "min": 2,
+        "type": "int"
+      },
+      "max_features": {
+        "values": [
+          "sqrt",
+          "log2",
+          0.5
+        ]
+      },
+      "ccp_alpha": {
+        "values": [
+          0.0,
+          0.00001,
+          0.0001,
+          0.001,
+          0.01
+        ]
+      }
+    }
+  },
+  "halving_grid_search": {
+    "keep_fraction": 0.35,
+    "parameters": {
+      "n_estimators": {
+        "count": 4,
+        "max": 300,
+        "min": 50,
+        "type": "int"
+      },
+      "max_depth": {
+        "count": 4,
+        "include_unlimited": true,
+        "max": 20,
+        "min": 8,
+        "type": "int"
+      },
+      "min_samples_leaf": {
+        "count": 4,
+        "max": 10,
+        "min": 1,
+        "type": "int"
+      },
+      "min_samples_split": {
+        "count": 4,
+        "max": 10,
+        "min": 2,
+        "type": "int"
+      },
+      "max_features": {
+        "values": [
+          "sqrt",
+          "log2",
+          0.5
+        ]
+      },
+      "ccp_alpha": {
+        "values": [
+          0.0,
+          0.00001,
+          0.0001,
+          0.001,
+          0.01
+        ]
+      }
+    }
+  },
+  "tuning_budget_minutes": 60.0
+}
