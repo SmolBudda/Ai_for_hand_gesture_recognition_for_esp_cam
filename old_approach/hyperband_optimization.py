@@ -211,6 +211,10 @@ class HyperbandOptimization:
         """Wizualizacja wyników optymalizacji Hyperband"""
         print("\n--- GENEROWANIE WYKRESÓW ---")
         
+        # Upewnienie się, że foldery istnieją
+        os.makedirs("output", exist_ok=True)
+        os.makedirs("models", exist_ok=True)
+        
         fig = plt.figure(figsize=(16, 10))
         
         # 1. Macierz pomyłek (jeśli dostępna)
@@ -403,6 +407,10 @@ class HyperbandOptimization:
         """Uruchomienie pełnego pipeline'u"""
         # 🕐 POCZĄTEK POMIARU CZASU
         pipeline_start_time = time.time()
+        
+        # Tworzenie niezbędnych folderów
+        os.makedirs("output", exist_ok=True)
+        os.makedirs("models", exist_ok=True)
         
         print("\n" + "="*70)
         print("HYPERBAND OPTIMIZATION - SUCCESSIVE HALVING")

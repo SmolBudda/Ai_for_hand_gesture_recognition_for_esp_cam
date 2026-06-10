@@ -1,0 +1,77 @@
+{
+  "best": {
+    "avg_nodes": 551.3458646616541,
+    "avg_tree_depth": 25.593984962406015,
+    "ccp_alpha": 1e-05,
+    "elapsed_seconds": 0.21986741598811932,
+    "max_depth": NaN,
+    "max_features": "sqrt",
+    "max_tree_depth": 40,
+    "method": "grid",
+    "min_samples_leaf": 1,
+    "min_samples_split": 2,
+    "n_estimators": 133,
+    "round": 1,
+    "total_nodes": 73329,
+    "tree_count": 133,
+    "val_accuracy": 0.9298245614035088,
+    "val_macro_f1": 0.9291953115952188
+  },
+  "cache": {
+    "cache_key": "efe02cf8b6ac6614",
+    "config": {
+      "grid": {
+        "ccp_alpha": [
+          0.0,
+          1e-05,
+          0.0001,
+          0.001,
+          0.01
+        ],
+        "max_depth": [
+          8,
+          12,
+          16,
+          20,
+          null
+        ],
+        "max_features": [
+          "sqrt",
+          "log2",
+          0.5
+        ],
+        "min_samples_leaf": [
+          1,
+          4,
+          7,
+          10
+        ],
+        "min_samples_split": [
+          2,
+          5,
+          7,
+          10
+        ],
+        "n_estimators": [
+          50,
+          133,
+          217,
+          300
+        ]
+      },
+      "max_combinations": null,
+      "max_runtime_seconds": 900.0
+    },
+    "inputs": {
+      "label_map.json": "157af579a86ad415f6a761d9baf8617adbb75ded879d2df5b8e5acb64ba82e6c",
+      "x_train.npy": "79b536279fb902335227031ca1345bb41bf7a260cda26292673f13d557085410",
+      "x_val.npy": "b6ba1b3ad03e99bd55ff3b23f95f44486753dab45c9357e700b4eeef0cb3408f",
+      "y_train.npy": "e3810d8430fa6a0eaa19d3a8c7d975a71e54d4df66c2cf23e22d64db2d8704a4",
+      "y_val.npy": "b4371821132848ab71057146ba6dc20ab2dad3600e529fe688072381ec863bd6"
+    },
+    "method": "grid",
+    "seed": 42,
+    "subset_fraction": 0.1
+  },
+  "row_count": 3102
+}

@@ -1,0 +1,19 @@
+{
+  "config": {
+    "config_file": "configs/pipeline/split.json",
+    "dataset_dir": "tiny_HaGRID/full_set",
+    "folds": 5,
+    "limit_per_class": null,
+    "ratios": {
+      "test": 0.15,
+      "train": 0.7,
+      "val": 0.15
+    },
+    "seed": 42
+  },
+  "outputs": [
+    "artifacts/01_splits/splits.csv",
+    "artifacts/01_splits/split_summary.json"
+  ],
+  "signature": "ba1733ea12fa92cc42a4c7f12ee611398f0c85bb25ef6d8a6499ee79b4ebbbed"
+}

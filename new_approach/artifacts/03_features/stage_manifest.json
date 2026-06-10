@@ -1,0 +1,11 @@
+{
+  "config": {
+    "config_file": "configs/pipeline/preprocess.json",
+    "drop_zero_hand": true
+  },
+  "outputs": [
+    "artifacts/03_features/feature_summary.json",
+    "artifacts/03_features/preprocessor.joblib"
+  ],
+  "signature": "bdf4d5f37bdbb21fc36a77425d2d1ec398ba04d9f22102913e15e0e8d41d8047"
+}
